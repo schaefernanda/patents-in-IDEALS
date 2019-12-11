@@ -46,8 +46,20 @@ for record in UIUC_patents:
     if record not in unique_patents:
         unique_patents.append(record)
 
-with open('fschaef2_UIUC_patents.json', 'w') as file_out:
-    json.dump(unique_patents, file_out, indent=4)
+PDF_URLs = []
+
+for item in unique_patents:
+    patent_number = item['patent_number']
+    first_portion = patent_number[-2:]
+    second_portion = patent_number[2:5]
+    third_portion = str(0) + patent_number[:2]
+    URL = "http://pimg-fpiw.uspto.gov/fdd/" + str(first_portion) + "/" + str(second_portion) + "/" + third_portion + "/0.pdf"
+    PDF_URLs.append(URL)
+
+print(PDF_URLs)
+
+# with open('fschaef2_UIUC_patents.json', 'w') as file_out:
+#     json.dump(unique_patents, file_out, indent=4)
 
 
 
