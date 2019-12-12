@@ -5,6 +5,7 @@ import csv
 import json
 import pathlib
 import requests
+from progressbar import ProgressBar
 
 OTM_inventors = []
 with open('fschaef2_UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
@@ -48,19 +49,26 @@ for record in UIUC_patents:
     if record not in unique_patents:
         unique_patents.append(record)
 
-target = pathlib.Path('fschaef2_patent_PDFs')
+PDF_URLs = []
 
-for item in unique_patents:
-    patent_number = item['patent_number']
-    first_portion = patent_number[-2:]
-    second_portion = patent_number[2:5]
-    third_portion = str(0) + patent_number[:2]
-    url = "http://pimg-fpiw.uspto.gov/fdd/" + str(first_portion) + "/" + str(second_portion) + "/" + third_portion + "/0.pdf"
-    myfile = requests.get(url)
-    filename = patent_number + ".pdf"
-    p = str(target / filename)
-    with open(p, 'wb') as file:
-        file.write(myfile.content)
+def get_patent_PDFs():
+    target = pathlib.Path('fschaef2_patent_PDFs')
+    pbar = ProgressBar()
+    for item in unique_patents:
+        patent_number = item['patent_number']
+        first_portion = patent_number[-2:]
+        second_portion = patent_number[2:5]
+        third_portion = str(0) + patent_number[:2]
+        url = "http://pimg-fpiw.uspto.gov/fdd/" + str(first_portion) + "/" + str(second_portion) + "/" + third_portion + "/0.pdf"
+        PDF_URLs.append(url)
+    for address in pbar(PDF_URLs[-200:]):
+        myfile = requests.get(address)
+        filename = patent_number + ".pdf"
+        p = str(target / filename)
+        with open(p, 'wb') as file:
+            file.write(myfile.content)
+
+get_patent_PDFs()
 
 # with open('fschaef2_UIUC_patents.json', 'w') as file_out:
 #     json.dump(unique_patents, file_out, indent=4)
