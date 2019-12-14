@@ -24,8 +24,6 @@ for inventor_information in OTM_inventors:
     OTM_inventor_full_name = inventor_information['full_name']
     OTM_inventor_full_names.append(OTM_inventor_full_name)
 
-# print(OTM_inventor_full_names)
-
 def get_patent_information():
     patents = metadata['patents']
     UIUC_affiliated_patents = list(set())
