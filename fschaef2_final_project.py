@@ -7,6 +7,7 @@ import pathlib
 import requests
 from progressbar import ProgressBar
 
+# Read in the CSV file obtained from the Office of Technology Management that contains all the inventors affiliated with the Urbana-Champaign campus.
 OTM_inventors = []
 with open('fschaef2_UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
@@ -15,15 +16,18 @@ with open('fschaef2_UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
 
 csvfile.close()
 
+# Read in the JSON response from the USPTO's PatentsView API containing metadata for all the patents issued to the Board of Trustees of the University of Illinois.
 with open('fschaef2_PatentsView_API_response.json') as response:
     metadata = json.load(response)
 
+# Create a list of the full names of the inventors in the OTM CSV file.
 OTM_inventor_full_names = []
 
 for inventor_information in OTM_inventors:
     OTM_inventor_full_name = inventor_information['full_name']
     OTM_inventor_full_names.append(OTM_inventor_full_name)
 
+# Create a function that will return only the patents from the PatentsView API response whose inventors are in the OTM CSV file. This narrows down the patents to only those affiliated with the Urbana-Champaign campus.
 def get_patent_information():
     patents = metadata['patents']
     UIUC_affiliated_patents = list(set())
@@ -41,12 +45,18 @@ def get_patent_information():
 
 UIUC_patents = get_patent_information()
 
+# I was getting a lot of duplicates through the function, and the file was close to 10 GB in size, so refined the function and did the following list accumulator to get only the unique patents, and it worked!
 unique_patents = []
 
 for record in UIUC_patents:
     if record not in unique_patents:
         unique_patents.append(record)
 
+# Save the unique patents affiliated with the Urbana-Champaign campus to a JSON file.
+with open('fschaef2_UIUC_patents.json', 'w') as file_out:
+    json.dump(unique_patents, file_out, indent=4)
+
+# Download the patent PDF files. There are 1,068 files, so I included a progress bar to keep track of the time. This function involved creating the URL for the patent PDFs, which I did by consulting a formula mentioned in the narrative.
 def get_patent_PDFs():
     target = pathlib.Path('fschaef2_patent_PDFs')
     pbar = ProgressBar()
@@ -64,9 +74,7 @@ def get_patent_PDFs():
 
 get_patent_PDFs()
 
-with open('fschaef2_UIUC_patents.json', 'w') as file_out:
-    json.dump(unique_patents, file_out, indent=4)
-
+# Save the patent metadata into CSV file that could then be used for batch uploads to IDEALS. This followed the conventions for IDEALS.
 allrows = []
 
 for record in unique_patents:
@@ -95,7 +103,5 @@ outfile = open('fschaef2_IDEALS_batch_upload.csv', 'w')
 csvout = csv.writer(outfile)
 csvout.writerow(['BUNDLE:ORIGINAL', 'dc_title', 'dc_creator', 'dc_date_issued', 'dc_description_abstract', 'dc_identifier'])
 csvout.writerows(allrows)
-
-
 
 
