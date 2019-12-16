@@ -12,3 +12,6 @@ This repository contains:
 * A manifest file describing the files and folder structures in this project
 * The original and exported data from this project
 * A folder containing the downloaded patent PDF files
+
+## Project Requirements
+The Python script uses the progressbar2 package when downloading the patent PDF files. The package can be installed through pip (`pip install progressbar2`). Documentation for the progressbar2 package can be found in the [package's Python Package Index page](https://pypi.org/project/progressbar2/).
