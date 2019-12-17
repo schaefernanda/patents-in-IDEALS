@@ -65,7 +65,7 @@ def get_patent_PDFs():
         first_portion = patent_number[-2:]
         second_portion = patent_number[2:5]
         third_portion = str(0) + patent_number[:2]
-        url = "http://pimg-fpiw.uspto.gov/fdd/" + str(first_portion) + "/" + str(second_portion) + "/" + third_portion + "/0.pdf"
+        url = "http://pimg-fpiw.uspto.gov/fdd/" + first_portion + "/" + second_portion + "/" + third_portion + "/0.pdf"
         myfile = requests.get(url)
         filename = patent_number + ".pdf"
         p = str(target / filename)
