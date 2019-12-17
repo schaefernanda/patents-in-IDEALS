@@ -1,5 +1,5 @@
 # final_project.py
-# This is the code I have for my final project.
+# The Python script for my final project.
 
 import csv
 import json
