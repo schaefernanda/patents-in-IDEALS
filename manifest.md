@@ -70,5 +70,5 @@ This JSON file contains only the metadata for unique patents that are affiliated
 This is the Python script written to process patent metadata, download patent PDF files, and export the processed metadata into a CSV file. 
 
 
-### final_project_check_in.py
+### final_project_check_in.py *(in GitHub repository only)*
 This file is the first version of the code, which was turned in as part of the check-in portion of the final project. It contains my first explorations into how to solve this patent processing problem.
