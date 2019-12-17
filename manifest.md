@@ -71,4 +71,4 @@ This is the Python script written to process patent metadata, download patent PD
 
 
 ### final_project_check_in.py
-This file is the first version of the code, which was turned as part of the check-in portion of the final project. It contains my first explorations into how to solve this patent processing problem.
+This file is the first version of the code, which was turned in as part of the check-in portion of the final project. It contains my first explorations into how to solve this patent processing problem.
