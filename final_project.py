@@ -1,4 +1,4 @@
-# fschaef2_final_project.py
+# final_project.py
 # This is the code I have for my final project.
 
 import csv
@@ -9,7 +9,7 @@ from progressbar import ProgressBar
 
 # Read in the CSV file obtained from the Office of Technology Management that contains all the inventors affiliated with the Urbana-Champaign campus.
 OTM_inventors = []
-with open('fschaef2_UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
+with open('UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         OTM_inventors.append(dict(row))
@@ -17,7 +17,7 @@ with open('fschaef2_UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
 csvfile.close()
 
 # Read in the JSON response from the USPTO's PatentsView API containing metadata for all the patents issued to the Board of Trustees of the University of Illinois.
-with open('fschaef2_PatentsView_API_response.json') as response:
+with open('PatentsView_API_response.json') as response:
     metadata = json.load(response)
 
 # Create a list of the full names of the inventors in the OTM CSV file.
@@ -53,12 +53,12 @@ for record in UIUC_patents:
         unique_patents.append(record)
 
 # Save the unique patents affiliated with the Urbana-Champaign campus to a JSON file.
-with open('fschaef2_UIUC_patents.json', 'w') as file_out:
+with open('UIUC_patents.json', 'w') as file_out:
     json.dump(unique_patents, file_out, indent=4)
 
 # Download the patent PDF files. There are 1,068 files, so I included a progress bar to keep track of the time. This function involved creating the URL for the patent PDFs, which I did by consulting a formula mentioned in the narrative.
 def get_patent_PDFs():
-    target = pathlib.Path('fschaef2_patent_PDFs')
+    target = pathlib.Path('patent_PDFs')
     pbar = ProgressBar()
     for item in pbar(unique_patents):
         patent_number = item['patent_number']
@@ -99,7 +99,7 @@ for record in unique_patents:
     row.append(dc_identifier)
     allrows.append(row)
 
-outfile = open('fschaef2_IDEALS_batch_upload.csv', 'w')
+outfile = open('IDEALS_batch_upload.csv', 'w')
 csvout = csv.writer(outfile)
 csvout.writerow(['BUNDLE:ORIGINAL', 'dc_title', 'dc_creator', 'dc_date_issued', 'dc_description_abstract', 'dc_identifier'])
 csvout.writerows(allrows)

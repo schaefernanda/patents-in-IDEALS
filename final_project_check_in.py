@@ -1,10 +1,10 @@
-# fschaef2_final_project_check_in.py
+# final_project_check_in.py
 # This is the code I have for my final project so far.
 
 import csv
 
 OTM_inventors = []
-with open('fschaef2_UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
+with open('UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         OTM_inventors.append(dict(row))
@@ -38,7 +38,7 @@ for inventor_information in OTM_inventors:
 
 import json
 
-with open('fschaef2_PatentsView_API_response.json') as response:
+with open('PatentsView_API_response.json') as response:
     metadata = json.load(response)
 
 API_inventor_first_names = []
