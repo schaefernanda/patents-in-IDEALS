@@ -43,15 +43,15 @@ This CSV file was exported at the end of the Python script, and it contains the 
 * BUNDLE:ORIGINAL
 The file name of the PDF file associated with the patent metadata.
 * dc_title
-The title of the patented invention.
+(The title of the patented invention)
 * dc_creator
-The named inventors of the patented invention.
+(The named inventors of the patented invention)
 * dc_date_issued
-The date when the patent was issued.
+(The date when the patent was issued)
 * dc_description_abstract
-The abstract of the patented invention.
+(The abstract of the patented invention)
 * dc_identifier
-The patent number of the patented invention. 
+(The patent number of the patented invention)
 
 
 ### PatentsView_API_response.json *(Infile)*
