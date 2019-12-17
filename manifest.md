@@ -18,8 +18,8 @@ The following are the files and folder structures in this project.
 
 ## Descriptions
 
-### fschaef2_patent_PDFs folder
-This folder contains the 1,068 patent PDF files that were downloaded using the get_patent_PDFs() function in the Python script. 
+### patent_PDFs folder
+This folder contains the 1,068 patent PDF files that were downloaded using the *get_patent_PDFs()* function in the Python script. Each file is named as *patent_number.pdf*.
 
 
 ### .DS Store
@@ -27,7 +27,7 @@ This file was automatically generated at some point while running my Python scri
 
 
 ### .gitignore
-This file was generated when I ignored the first "fschaef2_UIUC_patents.json" export because it was almost 10 GB in size. It is currently empty because I am not ignoring anything. 
+This file was generated when I ignored the first "UIUC_patents.json" export because it was almost 10 GB in size. It is currently empty because I am not ignoring anything.
 
 
 ### LICENSE
@@ -63,7 +63,7 @@ This CSV file contains the first, last, and full names of the inventors who are 
 
 
 ### UIUC_patents.json *(Outfile)*
-This JSON file contains only the metadata for unique patents that are affiliated with the University of Illinois at Urbana-Champaign campus. It was generated using the get_patent_information() function in the Python script and the for loop in lines 49-53. Please seelines 31-57 for the entire process of narrowing down the patents and exporting the patent metadata into a JSON file.
+This JSON file contains only the metadata for unique patents that are affiliated with the University of Illinois at Urbana-Champaign campus. It was generated using the *get_patent_information()* function in the Python script and the for loop in lines 49-53. Please see lines 31-57 for the entire process of narrowing down the patents and exporting the patent metadata into a JSON file.
 
 
 ### final_project.py
