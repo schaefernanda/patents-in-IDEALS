@@ -7,7 +7,7 @@ import pathlib
 import requests
 from progressbar import ProgressBar
 
-# Read in the CSV file obtained from the Office of Technology Management that contains all the inventors affiliated with the Urbana-Champaign campus.
+# Read in the CSV file obtained from the Office of Technology Management (OTM) that contains all the inventors affiliated with the Urbana-Champaign campus who have been issued patents.
 OTM_inventors = []
 with open('UIUC_inventors_OTM.csv', 'r', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
@@ -56,7 +56,7 @@ for record in UIUC_patents:
 with open('UIUC_patents.json', 'w') as file_out:
     json.dump(unique_patents, file_out, indent=4)
 
-# Download the patent PDF files. There are 1,068 files, so I included a progress bar to keep track of the time. This function involved creating the URL for the patent PDFs, which I did by consulting a formula mentioned in the narrative.
+# Download the patent PDF files. There are 1,068 files, so I included a progress bar to keep track of the time taken to download them. This function involved creating the URL for the patent PDFs, which I did by consulting a formula mentioned in the narrative.
 def get_patent_PDFs():
     target = pathlib.Path('patent_PDFs')
     pbar = ProgressBar()
@@ -74,7 +74,7 @@ def get_patent_PDFs():
 
 get_patent_PDFs()
 
-# Save the patent metadata into CSV file that could then be used for batch uploads to IDEALS. This followed the conventions for IDEALS.
+# Save the patent metadata into a CSV file that could then be used for batch uploads to IDEALS. This followed the conventions for IDEALS batch uploads.
 allrows = []
 
 for record in unique_patents:
