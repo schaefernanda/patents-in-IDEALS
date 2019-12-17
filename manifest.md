@@ -40,8 +40,8 @@ This Markdown file contains information about the project, the contents in the r
 
 ### IDEALS_batch_upload.csv *(Outfile)*
 This CSV file was exported at the end of the Python script, and it contains the metadata necessary to batch upload patent information to the IDEALS institutional repository. The columns include:
-* BUNDLE:ORIGINAL
-The file name of the PDF file associated with the patent metadata.
+* BUNDLE_ORIGINAL
+(The file name of the PDF file associated with the patent metadata)
 * dc_title
 (The title of the patented invention)
 * dc_creator
